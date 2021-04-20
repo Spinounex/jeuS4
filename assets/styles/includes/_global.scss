@@ -1,0 +1,79 @@
+@import 'variables';
+@import 'functions';
+@import 'fonts';
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+}
+
+.btn {
+    display: inline-block;
+    line-height: 20px;
+    padding: 6px 40px;
+    border-radius: 100px;
+
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font: Bold 20px $bambino;
+    border-width: 3px;
+    border-style: solid;
+    cursor: pointer;
+
+    transition: color 0.15s ease-out, background 0.2s ease-out;
+
+    $list: "red" $red, "yellow" $yellow, "black" $light-black, "white" #fff, "bluesnow" $blue-snow;
+    @each $item, $color in $list {
+        &.--#{$item} {
+            @include btnColor($color);
+
+            &.--filled {
+                background: $color;
+                color: testLightness($color);
+            }
+
+            &:hover {
+                color: testLightness($color);
+                background: $color;
+
+                &.--filled {
+                    background: darken($color, 5%);
+                    border-color: darken($color, 5%);
+                }
+            }
+
+            @if $item == 'bluesnow' {
+                border-color: black;
+                
+                &:hover {
+                    color: testLightness($color);
+                    background: $color;
+
+                    &.--filled {
+                        background: darken($color, 5%);
+                        border-color: inherit;
+                    }
+                }
+            }
+        }
+    }
+
+    &.--big {
+        min-width: 150px;
+        font-size: 24px;
+    }
+
+    &.--light {
+        background: #fff;
+    }
+
+    &.--dark {
+        background: $light-black;
+    }
+}

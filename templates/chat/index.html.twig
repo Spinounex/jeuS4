@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Chat{% endblock %}
+
+{% block body %}
+
+    <div id="affiche"></div>
+    <div id="recherche">
+
+        <input type="text" id="pseudo"  name="pseudo" placeholder="Votre Pseudo">
+        <input type="text" id="message" name="message" placeholder="Votre message">
+        <input type="submit" id="envoyer" value="Envoyer">
+    </div>
+
+{% endblock %}

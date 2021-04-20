@@ -1,0 +1,27 @@
+@mixin font($weight, $size, $family, $style: normal) {
+  font-family: $family;
+  font-size: $size;
+  font-weight: $weight;
+  font-style: $style;
+}
+
+@mixin flex($direction: row, $justify: center, $align: center) {
+  display: flex;
+  align-items: $align;
+  justify-content: $justify;
+  flex-direction: $direction;
+}
+
+@mixin btnColor($color) {
+  border-color: $color;
+  color: $color;
+}
+
+@function testLightness($color) {
+  @if (lightness($color) > 50%) {
+    @return $light-black;
+  }
+  @else {
+    @return #fff;
+  }
+}

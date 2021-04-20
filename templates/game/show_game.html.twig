@@ -1,43 +1,183 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
-    <div class="row">
-        <div class="col-8">
-            Cartes de l'adversaire
-            {% for card in set.user2HandCards %}
-                <img src="{{ asset('cartes/'~cards[card].picture) }}">{{ cards[card].number }}
-            {% endfor %}
-        </div>
-        <div class="col-4">
-            Actions
-        </div>
+    <div id="overlay" style="width: 100vw; height: 100vh; background-color:rgba(0,0,0,0.7) ; position: fixed; z-index: 999;
+"></div>
+    <div id="plateau">
+        {{ render(controller('App\\Controller\\GameController::refreshPlateauGame', {game:game.id})) }}
     </div>
-    <div class="row">
-        Plateau adversaire
-    </div>
-    <div class="row">
-        Plateau
-    </div>
-    <div class="row">
-        Mon Plateau
-    </div>
-    <div class="row">
-        <div class="col-8">
-            {% for card in set.user1HandCards %}
-                <img src="{{ asset('cartes/'~cards[card].picture) }}">{{ cards[card].number }}
-            {% endfor %}
-        </div>
-        <div class="col-4">
-            Mes Actions
-        </div>
-    </div>
-
-
-
+    <button id="finDeTour">Fin De Tour</button>
+    <div id="message">...</div>
 {% endblock %}
 
 {% block title %}
 
 {% endblock %}
 
+{% block javascripts %}
+    <script>
+        let boucle
+        $(document).ready(function(){
+            boucle = setInterval(refreshGame, 3000);
+        })
+        $(document).on('click', '#finDeTour', function() {
+            //mettre à jour game en changeant quiJoue
+            $.ajax({
+                url: "{{ path('fin_tour', {game: game.id}) }}",
+                success: function(data) {
+                    if (data == true){
+                        //Bloquer le plateau (overlay, ...)
+
+                        OverlayOn()
+
+                        //Relancer le timer...
+                        boucle = setInterval(refreshGame, 3000);
+                        $('#finDeTour').hide();
+                        $('#message').html('Tour de votre adversaire')
+
+                    }
+                },
+
+                error: function(){
+                }
+            })
+            $.ajax({
+                url: "{{ path('reset_pioche', {game: game.id}) }}",
+                success: function(data) {
+
+                },
+                error: function(){
+                }
+            })
+        })
+        function refreshGame() {
+            $.ajax({
+                url: "{{ path('get_tour', {game: game.id}) }}",
+                success: function(data) {
+                    console.log(data)
+                    if (data == false) {
+                        $('#message').html('Tour de votre adversaire')
+                        OverlayOn()
+
+                    } else {
+
+
+                        //mettre à jour le plateau, dès que je récupère true
+
+                        clearInterval(boucle)
+
+                        $('#plateau').load("{{ path('refresh_plateau_game', {game:game.id}) }}",function(responseTxt, statusTxt, xhr){
+                            if(statusTxt == "success")
+                                $('#message').html('C\'est mon tour...')
+                            OverlayOff()
+
+                                if(statusTxt == "error")
+                                    console.log("Error: " + xhr.status + ": " + xhr.statusText);
+                        })
+
+                    }
+                },
+                error: function(){
+                }
+            })
+            $.ajax({
+                url: "{{ path('pioche', {game: game.id}) }}",
+                success: function(data) {
+                    console.log(data);
+                    if (data != true){
+                        document.getElementById("mainY").innerHTML += '<input type="checkbox" name="carte_secret" id="carte'+ data[0] +'" value="' + data[0] + '" style="display: none" class="choixSecret"><label for="carte' + data[0] + '" class="labelCard"><img class="card cardY" src="../../../public/img/cartes/'+ data[1] +'.png"></label>';
+                    }
+                },
+                error: function(){
+
+                }
+            })
+        }
+        let action
+        $(document).on('click', '#secret', function(){
+            console.log('secret')
+            action = 'secret' //mémorise l'action en cours
+            $('.choixSecret').show()
+
+
+
+            $("input:checkbox").click(function () {
+                let bol = $("input:checkbox:checked").length >= 1
+                $("input:checkbox").not(":checked").attr("disabled", bol)
+            });
+
+            $('#valider').show()
+        })
+
+
+
+        $(document).on('click', '#depot', function(){
+
+
+
+            console.log('depot')
+            action = 'depot' //mémorise l'action en cours
+            $('.choixSecret').show()
+
+            $("input:checkbox").click(function () {
+                let bol = $("input:checkbox:checked").length >= 2
+                $("input:checkbox").not(":checked").attr("disabled", bol)
+            });
+
+            $('#valider').show()
+        })
+
+
+
+        $(document).on('click', '#valider', function(){
+            switch (action) {
+                case 'secret':
+                    donneesAction = {
+                        action: 'secret',
+                        carte: $('input[name="carte_secret"]:checked').val()
+                    }
+
+
+                    break;
+                case 'depot':
+
+                    var array = [];
+                    $.each($("input[name='carte_secret']:checked"), function () {
+                        array.push($(this).val());
+                    });
+                    donneesAction = {
+                        action: 'depot',
+                        carte: array[0],
+                        carte2: array[1]
+                    }
+
+
+                    break;
+                case 'offre':
+                    break;
+                case 'echange':
+                    break;
+            }
+            $.ajax({
+                url: "{{ path('action_game', {game: game.id}) }}",
+                data: donneesAction,
+                method: 'POST',
+                success: function(data) {
+                    if (data == true) {
+                        $('#plateau').load("{{ path('refresh_plateau_game', {game:game.id}) }}")
+                    }
+                },
+                error: function(){
+                }
+            })
+        })
+
+        function OverlayOn() {
+            document.getElementById("overlay").style.display = "block";
+        }
+        function OverlayOff() {
+            document.getElementById("overlay").style.display = "none";
+        }
+
+    </script>
+{% endblock %}

@@ -1,37 +1,57 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
-        {% block stylesheets %}
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-        {% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
 
-        {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
-        {% endblock %}
-    </head>
-    <body>
-    <header>
-        <div class="navbar navbar-dark bg-dark shadow-sm">
-            <div class="container">
-                <a href="#" class="navbar-brand d-flex align-items-center">
-                    <strong>Jeu</strong>
-                </a>
-                <span class="text-white">
-                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    Bonjour {{ app.user.fisrtName }}. <a href="{{ path('app_logout') }}">Me déconnecter</a>
-                {% else %}
-                    <a href="{{ path('app_login') }}">Me connecter</a>
-                {% endif %}
-                    </span>
-            </div>
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous"></script>
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</head>
+<body>
+{#<header>
+    <nav>
+        <a href="{{ path('default') }}">
+            <h1>Spooky Clues</h1>
+        </a>
+        <div class="nav__links">
+            <a href="{{ path('user_profil') }}">Jouer</a>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <a href="{{ path('app_logout') }}">Déconnexion</a>
+            {% else %}
+                <a href="{{ path('app_login') }}">Connexion</a>
+            {% endif %}
         </div>
-    </header>
-    <main class="container">
-        {% block body %}{% endblock %}
-    </main>
-    </body>
+    </nav>
+</header>#}
+
+<main id="app">
+    {% block body %}{% endblock %}
+</main>
+
+<footer>
+    <div class="wrapper">
+        <div class="links">
+            <a href="/annexes/mentions">Mentions légales</a>
+            <a href="{{ path('admin') }}">Accès back office</a>
+        </div>
+        <div class="copyright">
+            <span>&copy; 2021 Cobalt Society</span>
+            <img src="{{ asset('build/images/logo_cobalt.png') }}" alt="Logo de l'agence Cobalt Society">
+        </div>
+        <div class="icons">
+            <img src="{{ asset('build/images/facebook.png') }}" alt="Logo de Facebook">
+            <img src="{{ asset('build/images/instagram.png') }}" alt="Logo de Instagram">
+            <img src="{{ asset('build/images/twitter.png') }}" alt="Logo de Twitter">
+        </div>
+    </div>
+</footer>
+</body>
 </html>

@@ -1,0 +1,82 @@
+
+<div class="row">
+    <div class="col-8">
+        Cartes de l'adversaire
+        {% for card in adversaire.handCards %}
+            <img style="width: 60px" src="{{ asset('cartes_objet/petitdos.png') }}">
+        {% endfor %}
+    </div>
+    <div class="col-4">
+        Actions
+
+        {% if adversaire.actions['SECRET']==false %}
+            <input type="image" id="secret" style="width: 60px" src="{{ asset('cartes_action/secretrouge.png') }}">
+        {% else %}
+            <input type="image" id="secret" style="width: 60px; filter: grayscale(81%) "  src="{{ asset('cartes_action/secretrouge.png') }}">
+        {% endif %}
+
+        {% if adversaire.actions['DEPOT']==false %}
+            <input type="image" id="depot" style="width: 60px" src="{{ asset('cartes_action/depotrouge.png') }}">
+        {% else %}
+            <input type="image" id="depot" style="width: 60px;filter: grayscale(81%)" src="{{ asset('cartes_action/depotrouge.png') }}">
+        {% endif %}
+
+
+        <input type="image" id="offre" style="width: 60px" src="{{ asset('cartes_action/offrerouge.png') }}">
+        <input type="image" id="echange" style="width: 60px" src="{{ asset('cartes_action/echangerouge.png') }}">
+
+    </div>
+</div>
+<div class="row">
+    Plateau adversaire
+</div>
+<div>
+
+    <img style="width: 60px" src="{{ asset('cartes_perso/temoin.png') }}" alt="">
+    <img style="width: 60px" src="{{ asset('cartes_perso/perchiste.png') }}" alt="">
+    <img style="width: 60px" src="{{ asset('cartes_perso/agent.png') }}" alt="">
+    <img style="width: 60px" src="{{ asset('cartes_perso/medecin.png') }}" alt="">
+    <img style="width: 60px" src="{{ asset('cartes_perso/policier.png') }}" alt="">
+    <img style="width: 60px" src="{{ asset('cartes_perso/skieuse.png') }}" alt="">
+    <img style="width: 60px" src="{{ asset('cartes_perso/passante.png') }}" alt="">
+
+
+</div>
+<div class="row">
+    Mon Plateau
+</div>
+<div class="row">
+    <div class="col-8">
+        {% for card in moi.handCards %}
+            <img style="width: 60px" src="{{ asset('cartes_objet/'~cards[card].picture) }}">
+            <input type="checkbox" name="carte_secret" id="carte{{ card }}" value="{{ card }}" style="display: none" class="choixSecret">
+    </span>
+        {% endfor %}
+    </div>
+    <div class="col-4">
+        Mes Actions :
+
+        {% if moi.actions['SECRET']==false %}
+        <input type="image" id="secret" style="width: 60px" src="{{ asset('cartes_action/secretbleu.png') }}">
+        {% else %}
+        <input type="image" id="secret" style="width: 60px; filter: grayscale(81%) "  src="{{ asset('cartes_action/secretbleu.png') }}">
+        {% endif %}
+
+        {% if moi.actions['DEPOT']==false %}
+            <input type="image" id="depot" style="width: 60px" src="{{ asset('cartes_action/depotbleu.png') }}">
+        {% else %}
+            <input type="image" id="depot" style="width: 60px;filter: grayscale(81%)" src="{{ asset('cartes_action/depotbleu.png') }}">
+        {% endif %}
+
+
+        <input type="image" id="offre" style="width: 60px" src="{{ asset('cartes_action/offrebleu.png') }}">
+        <input type="image" id="echange" style="width: 60px" src="{{ asset('cartes_action/echangebleu.png') }}">
+        <button id="valider" style="display: none">Valider action</button>
+
+        <a href="{{ path('user_profil') }}" class="navbar-brand d-flex align-items-center">
+            <strong>Quitter la partie</strong>
+        </a>
+    </div>
+
+
+</div>

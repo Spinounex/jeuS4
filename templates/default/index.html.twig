@@ -1,20 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DefaultController!{% endblock %}
+{% block title %}Accueil | SpookyClues{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <div class="homepage">
+        <section class="hero-section">
+            <div class="wrapper">
+                <img src="{{ asset('build/images/logo.png') }}" alt="Logo du jeu SpookyClues">
+                <h2 class="tagline">Des incides à vous glacer le sang</h2>
+                <a href="{{ path('user_profil') }}" class="btn --red --light --big">Jouer</a>
+            </div>
+        </section>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+        <section class="description-section">
+            <div class="wrapper">
+                <p>Un meurtre a été commis à Serre-Chevalier, station de ski dans les Alpes. Un homme d’affaires a été retrouvé dans la neige devant son chalet. La police se rend sur place et engage un détective afin de trouver le coupable. L’un de vous est l’auteur de ce crime et l’autre est le détective.
+                </p>
+                <p>Votre but à chacun est réunir plus d’indices que votre adversaire, afin de résoudre l’affaire pour le détective ou de ne pas se faire accuser pour le meurtrier.</p>
+                <a href="{{ path('user_profil') }}" class="btn --red --light --big">Jouer</a>
+            </div>
+            <img src="{{ asset('build/images/section1_banner.png') }}" alt="Châlet entouré d'arbres avec des montagnes en fond">
+        </section>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/davidannebicque/htdocs/jeuS4/src/Controller/DefaultController.php'|file_link(0) }}">src/Controller/DefaultController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/davidannebicque/htdocs/jeuS4/templates/default/index.html.twig'|file_link(0) }}">templates/default/index.html.twig</a></code></li>
-    </ul>
-</div>
+        <section class="video-section">
+            <div class="wrapper">
+                <img class="policeman" src="{{ asset('build/images/policier.png') }}" alt="Détective de police en uniforme">
+                <div class="video-container">
+                    <img class="snow" src="{{ asset('build/images/neige_1.png') }}" alt="Neige fondant sur la vidéo">
+                    <img class="rock rock--left" src="{{ asset('build/images/stone_1.png') }}" alt="Pierre recouverte de neige">
+                    <img class="rock rock--right" src="{{ asset('build/images/stone_2.png') }}" alt="Pierre recouverte de roche">
+                    <video src=""></video>
+                </div>
+            </div>
+        </section>
+    </div>
 {% endblock %}

@@ -21,4 +21,17 @@ class UserController extends AbstractController
             'user' => $this->getUser(),
         ]);
     }
+
+    /**
+     * @Route("/rules", name="rules")
+     */
+    public function rules()
+    {
+        return $this->render('user/rules.html.twig');
+    }
+
+
+
+
+
 }

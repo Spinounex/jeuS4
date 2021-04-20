@@ -1,0 +1,260 @@
+.plateau-container {
+    width: 100%;
+    min-height: 100vh;
+    padding: 120px 100px;
+    @include flex($align: flex-start);
+
+    .wrapper {
+        position: relative;
+        width: 100%;
+        max-width: 1400px;
+        padding-top: 100px;
+        padding-right: 300px;
+        @include flex($direction: column, $align: flex-start);
+        column-gap: 60px;
+
+        img {
+            display: block;
+        }
+
+        #plateau {
+            width: 100%;
+            max-width: 1000px;
+            @include flex($direction: column);
+            row-gap: 40px;
+
+            .characters {
+                width: 100%;
+                @include flex($justify: space-between);
+                column-gap: 15px;
+
+                .card {
+                    width: 100%;
+
+                    img {
+                        width: 100%;
+                    }
+                }
+            }
+
+            .player-container {
+                @include flex;
+                column-gap: 40px;
+                --width: 200px;
+                --height: 500px;
+
+                .player-container__actions {
+                    width: var(--width);
+                    @include flex($direction: column);
+                    row-gap: 20px;
+
+                    .actions {
+                        @include flex;
+                        flex-wrap: wrap;
+                        gap: 20px;
+
+                        .action-button {
+                            width: calc((100% / 2) - 10px);
+
+                            input {
+                                width: 100%;
+
+                                &:not(:focus) {
+                                    filter: brightness(90%);
+                                }
+
+                                &:focus {
+                                    filter: brightness(110%);
+                                }
+
+                                &[disabled] {
+                                    filter: grayscale(100%);
+                                }
+                            }
+                        }
+                    }
+
+                    .stack {
+                        width: 60%;
+
+                        img {
+                            width: 100%;
+                        }
+                    }
+                }
+
+                .player-container__personnal {
+                    flex: 1 1 0%;
+                    height: var(--height);
+                    @include flex($direction: column, $justify: space-between);
+
+                    .action-selector {
+                        height: calc(var(--height) * (2.5/5));
+                        width: 100%;
+                        padding: 20px 40px;
+                        border: 5px solid $yellow;
+                        border-radius: 20px;
+                        @include flex($direction: column);
+                        row-gap: 20px;
+
+                        &.disabled {
+                            filter: grayscale(100%);
+                            opacity: .6;
+                        }
+
+                        p {
+                            text-transform: uppercase;
+                            font-family: Beckman;
+                            font-size: 26px;
+                        }
+
+                        .action-selector__main {
+                            width: 100%;
+                            height: 80%;
+                            @include flex($align: flex-end, $justify: flex-end);
+                            column-gap: 40px;
+
+                            .action {
+                                @include flex;
+                                height: 100%;
+                                column-gap: 20px;
+
+                                .slot {
+                                    @include flex;
+                                    height: 100%;
+                                    column-gap: 8px;
+
+                                    .card-container {
+                                        width: 100%;
+                                        height: 100%;
+
+                                        img {
+                                            width: 100%;
+                                            height: 100%;
+                                            object-fit: contain;
+                                            object-position: center bottom;
+                                        }
+                                    }
+                                }
+                            }
+
+                            .validation {
+                                button {
+                                    font-family: "Bambino",sans-serif;
+                                    font-size: 1.1em;
+                                    text-transform: uppercase;
+                                    width: 100%;
+                                    padding: 3px 10px;
+                                    border-radius: 10px;
+                                    background: #231F20;
+                                    color: #F3DF9F;
+                                    border: 2px solid #F3DF9F;
+                                    margin-bottom: 6px;
+                                }
+                            }
+                        }
+                    }
+
+                    .hand {
+                        height: calc(var(--height) * (2/5));
+                        width: 100%;
+                        @include flex($align: flex-end);
+                        column-gap: 15px;
+
+                        .card-container {
+                            width: 100%;
+    
+                            img {
+                                width: 100%;
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+
+        #chat {
+            position: absolute;
+            top: 100px;
+            right: 0;
+            width: 18vw;
+            height: 70vh;
+            background: white;
+            box-shadow: 0 2px 4px 1px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 30px;
+            @include flex($direction: column, $align: left);
+            row-gap: 20px;
+
+            .chat-box {
+                @include flex($direction: column);
+                width: 100%;
+                flex: 1 1 0%;
+                row-gap: 15px;
+
+                .chat-box__text {
+                    flex: 1 1 0%;
+                    background: #f7f7f7;
+                    width: 100%;
+                    border-radius: 10px;
+                    box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+                    padding: 10px;
+                    @include flex($align: flex-end, $justify: flex-start);
+
+                    &__wrapper {
+                        @include flex($justify: flex-end, $direction: column, $align: left);
+                        flex: 1 1 0%;
+
+                        p {
+                            padding: 4px 22px;
+                            border-radius: 3px;
+                            
+
+                            &:nth-child(2n +1) {
+                                background: rgb(241, 241, 241);
+                            }
+                        }
+                    }
+                }
+
+                .chat-box__send {
+                    height: 60px;
+                    width: 100%;
+                    border-radius: 15px;
+                    @include flex;
+                    column-gap: 15px;
+
+                    &__message {
+                        border: none;
+                        outline: none;
+                        background: #f7f7f7;
+                        border-radius: 5px;
+                        padding: 7px 12px;
+                        font-size: 17px;
+                        font-family: Bambino;
+                        flex: 1 1 0%;
+                        width: 100%;
+                    }
+
+                    &__send-btn {
+                        font-size: 16px;
+                        background: #111;
+                        border-radius: 10px;
+                        color: #fff;
+                        padding: 7px 15px;
+                        cursor: pointer;
+                        
+                        &:hover {
+                            background: lighten(#111, 10%);
+                        }
+                    }
+                }
+            }
+        }
+
+        #finDeTour {
+            margin-top: 30px;
+        }
+    }
+}

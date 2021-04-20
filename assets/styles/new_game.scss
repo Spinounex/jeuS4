@@ -1,0 +1,89 @@
+.new-game {
+    width: 100%;
+    @include flex($align: flex-start);
+    padding: 120px 100px;
+    min-height: 100vh;
+
+    .wrapper {
+        width: 100%;
+        max-width: 1100px;
+        padding-top: 100px;
+
+        h2 {
+            font-size: 42px;
+            font-family: Beckman;
+            font-weight: 500;
+        }
+
+        form {
+            margin-bottom: 80px;
+        }
+
+        form.create-game {
+            margin-top: 40px;
+            @include flex($direction: column, $align: flex-start);
+            row-gap: 30px;
+            font-family: Bambino;
+
+            .field-container {
+                @include flex($direction: column, $align: flex-start);
+                row-gap: 5px;
+                width: 100%;
+    
+                label {
+                    padding-left: 10px;
+                    font-size: 24px;
+                    color: black;
+                    text-transform: uppercase;
+                }
+
+                select {
+                    border: 3px solid $blue-snow;
+                    border-radius: 30px;
+                    padding: 7px 12px;
+                    font-size: 20px;
+                    font-family: Beckman;
+                    font-weight: 400;
+                    outline: none;
+
+                    &:not(:last-child) {
+                        margin-right: 10px;
+                    }
+                }
+            }
+        }
+
+        form.join-game {
+            margin-top: 40px;
+            @include flex($direction: column, $align: flex-start);
+            row-gap: 30px;
+            font-family: Bambino;
+
+            .field-container {
+                @include flex($direction: column, $align: flex-start);
+                row-gap: 5px;
+                width: 100%;
+    
+                label {
+                    padding-left: 10px;
+                    font-size: 24px;
+                    color: black;
+                    text-transform: uppercase;
+                }
+
+                input {
+                    border-radius: 100px;
+                    border: 3px solid $blue-snow;
+                    padding: 8px 30px;
+                    font-size: 24px;
+                    font-family: Bambino;
+                    outline: none;
+
+                    &[type=number] {
+                        max-width: 140px;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,147 @@
+.profile-page {
+    @include flex($align: flex-start);
+    min-height: 100vh;
+    width: 100%;
+    padding: 120px 100px;
+
+    .wrapper {
+        height: 100%;
+        width: 100%;
+        max-width: 1100px;
+        padding-top: 100px;
+
+        h2 {
+            font-size: 40px;
+            font-weight: 400;
+            text-align: center;
+            font-family: Beckman;
+        }
+
+        .profile-resume {
+            margin-top: 80px;
+            @include flex($direction: column);
+            width: 100%;
+
+            .profile-resume__wrapper {
+                flex: 1 1 0%;
+                max-width: 900px;
+                @include flex($align: flex-start);
+                gap: 40px 60px;
+
+                img {
+                    width: 30%;
+                    border-radius: 30px;
+                }
+
+                .description {
+                    padding-top: 20px;
+                    flex: 1 1 0%;
+
+                    ul {
+                        margin-bottom: 20px;
+
+                        li {
+                            font-size: 22px;
+                            text-transform: uppercase;
+                            font-weight: 500;
+                            font-family: Beckman;
+
+                            span {
+                                font-family: Bambino;
+                                text-transform: none;
+                                font-weight: 400;
+                            }
+                        }
+                    }
+
+                    a {
+                        font-size: 18px;
+                    }
+                }
+            }
+
+            .profile-infos {
+                margin-top: 60px;
+                width: 100%;
+                @include flex;
+    
+                .profile-infos__wrapper {
+                    flex: 1 1 0%;
+                    max-width: 800px;
+                    @include flex($justify: flex-start);
+
+                    .infos {
+                        ul {
+                            li {
+                                font-size: 22px;
+                                text-transform: uppercase;
+                                font-weight: 500;
+                                font-family: Beckman;
+
+                                span {
+                                    font-family: Bambino;
+                                    text-transform: none;
+                                    font-weight: 400;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .profile-stats {
+                margin-top: 120px;
+                width: 100%;
+                @include flex;
+
+                .profile-stats__wrapper {
+                    flex: 1 1 0%;
+                    max-width: 900px;
+                    @include flex;
+
+                    .stats {
+                        flex: 1 1 0%;
+                        @include flex($direction: column);
+                        row-gap: 30px;
+
+                        .stat {
+                            width: 100%;
+                            flex: 1 1 0%;
+                            @include flex($align: center, $justify: space-between);
+                            border-radius: 10px;
+                            padding: 14px 30px;
+                            font-family: Beckman;
+
+                            .stat__major {
+                                @include flex($direction: column, $align: center, $justify: flex-start);
+
+                                .pseudo {
+                                    font-size: 32px;
+                                }
+                                .victories {
+                                    font-size: 26px;
+                                }
+                            }
+
+                            &.stat--win {
+                                background: linear-gradient(89.93deg, #9FC1CB 0.05%, rgba(159, 193, 203, 0) 99.94%);
+                                justify-content: flex-start;
+                                .stat__major {
+                                    align-items: flex-start;
+                                }
+                            }
+
+                            &.stat--lose {
+                                background: linear-gradient(270deg, #BB4430 0%, rgba(159, 193, 203, 0) 100%);
+                                justify-content: flex-end;
+                                .stat__major {
+                                    align-items: flex-end;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

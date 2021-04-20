@@ -1,9 +1,55 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Profil{% endblock %}
+{% block title %}Profil | SpookyClues{% endblock %}
 
 {% block body %}
-<h1>Bonjour {{ user.fisrtName }}</h1>
-    <u>Votre email :</u> {{ user.email }}
-
+	<div class="profile-page">
+        <div class="wrapper">
+            <h2>Informations personnelles</h2>
+            <div class="profile-resume">
+                <div class="profile-resume__wrapper">
+                    <img src="{{ asset('build/images/profile-pic.jpg') }}" alt="Image de profil">
+                    <div class="description">
+                        <ul>
+                            <li>Nom : <span>{{ user.firstName }}</span></li>
+                            <li>Prénom : <span>{{ user.firstName }}</span></li>
+                            <li>Pseudo : <span>{{ user.firstName }}</span></li>
+                            <li>Adresse mail : <span>{{ user.email }}</span></li>
+                        </ul>
+                        <a href="" class="btn --black">Changer le mot de passe</a>
+                    </div>
+                </div>
+                <div class="profile-infos">
+                    <div class="profile-infos__wrapper">
+                        <div class="infos">
+                            <ul>
+                                <li>Date d'inscription : <span></span></li>
+                                <li>Date de dernière connexion : <span></span></li>
+                                <li>Nombre de victoires : <span>0</span></li>
+                                <li>Nombre de défaites : <span>0</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-stats">
+                    <div class="profile-stats__wrapper">
+                        <div class="stats">
+                            <div class="stat stat--win">
+                                <div class="stat__major">
+                                    <span class="pseudo">{{ user.firstName }}</span>
+                                    <span class="victories">3 victoires</span>
+                                </div>
+                            </div>
+                            <div class="stat stat--lose">
+                                <div class="stat__major">
+                                    <span class="pseudo">{{ user.firstName }}</span>
+                                    <span class="victories">3 victoires</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
 {% endblock %}

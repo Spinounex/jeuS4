@@ -6,11 +6,13 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
 class User implements UserInterface
 {
@@ -66,6 +68,16 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=Game::class, mappedBy="winner")
      */
     private $winners;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isVerified = false;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $picture;
 
     public function __construct()
     {
@@ -155,12 +167,12 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-    public function getFisrtName(): ?string
+    public function getFirstName(): ?string
     {
         return $this->firstname;
     }
 
-    public function setFirstNale(string $firstname): self
+    public function setFirstName(string $firstname): self
     {
         $this->firstname = $firstname;
 
@@ -284,5 +296,29 @@ class User implements UserInterface
     public function display()
     {
         return $this->firstname.' '.$this->lastname;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?string $picture): self
+    {
+        $this->picture = $picture;
+
+        return $this;
     }
 }

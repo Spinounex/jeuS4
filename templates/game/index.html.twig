@@ -1,9 +1,12 @@
+{#
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello GameController!{% endblock %}
 
 {% block body %}
 <form action="{{ path('create_game') }}" method="post">
+
+   <u><h1>Création de la partie</h1></u>
     <div>
         Moi
     </div>
@@ -21,4 +24,53 @@
     <button type="submit">Commencer la partie</button>
 
 </form>
+{% endblock %}
+#}
+
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle partie | SpookyClues{% endblock %}
+
+{% block body %}
+
+    <div class="new-game">
+        <div class="wrapper">
+            <h2>Créer une partie</h2>
+            <form class="create-game" action="{{ path('create_game') }}" method="post">
+                <div class="field-container">
+                    <label for="user2">Adversaire</label>
+                    <select name="user2" id="user2">
+                        <option value="" disabled>Choisir le joueur 2</option>
+                        {% for user in users|filter(user => user.id != app.user.id) %}
+                            <option value="{{ user.id }}">{{ user.display }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <button class="btn --red" type="submit">Lancer</button>
+            </form>
+
+            <h2>Rejoindre une partie</h2>
+            <form class="join-game">
+                <div class="field-container">
+                    <label for="join-game-input">Numéro</label>
+                    <input type="number" id="join-game-input">
+                </div>
+                <button id="join-game-btn" class="btn --red">Joindre</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const joinInput = document.querySelector('#join-game-input')
+        const joinBtn = document.querySelector('#join-game-btn')
+
+        joinBtn.addEventListener('click', function(e) {
+            e.preventDefault()
+            let gameId = joinInput.value
+            window.location.href = "http://localhost:8888/jeuS4/public/index.php/show-game/" + gameId
+        })
+    </script>
+
 {% endblock %}

@@ -1,0 +1,211 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/rules.css')}}">
+{% endblock %}
+
+{% block title %}Profil{% endblock %}
+
+{% block body %}
+
+    <section class="section-black section-rules">
+        <div class="section-content">
+            <div class="container">
+                <div class="btn btn-red text-center col-5 col-sm-4 col-md-3 col-lg-2">
+                    <a href="#">Règles</a>
+                </div>
+                <div class="row section-rules-text">
+                    <div class="offset-1 col-10 offset-lg-1 col-lg-5">
+                        <p>Au début de la partie, chaque joueur se voit distribuer 6 cartes objets, ainsi que les 4 jetons d’action. Les 7 maîtres ninja leur font alors face. Le but premier est d’utiliser les différentes cartes objets associées à leur domaine de prédilection pour attirer leurs faveurs. Le premier ayant convaincu 4 des 7 maîtres, ou ayant cumulé 11 points de **, a gagné la partie.</p>
+                        <p>Chaque tour se découpe en 3 phases :
+                            Lors de la première phase, on retire une carte au hasard du paquet, puis on distribue les cartes et les jetons. Les cartes restantes forment une pile.
+                            Lors de la deuxième phase, chaque joueur va utiliser ses 4 actions, l’une après l’autre. Le plus jeune commence.</p>
+                    </div>
+                    <div class="offset-1 col-10 offset-lg-0 col-lg-5">
+                        <p>Lors de la troisième phase, les joueurs retournent chacun leurs six cartes, et on compte les points. Les joueurs ayant le plus de cartes correspondantes aux maîtres gagnent leurs faveurs. Si les 2 joueurs possèdent le même nombre de cartes correspondant au même maître, alors le maître reste neutre. Si l'un des deux joueurs possède 4 maîtres, ou 11 points de **, il gagne la partie. Sinon on ramasse toutes les cartes, et on retourne à la phase 1. Celui qui commence change à chaque tour.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- CARTES -->
+    <section class="section-red section-cards">
+        <div class="section-cards-bg">
+            <div class="section-content">
+                <div class="container">
+                    <div class="btn btn-black text-center col-5 col-sm-4 col-md-3 col-lg-2">
+                        <a href="#">Cartes et jetons</a>
+                    </div>
+                    <div class="row section-cards-text-l1">
+                        <div class="offset-1 col-10 offset-md-5 col-md-5">
+                            <p>Le jeu est composé de 4 éléments principaux : des cartes de maîtres, des cartes d’objets, des jetons d’actions et des jetons de victoire. Chacun de ses éléments ont un rôle différent et primordial dans le jeu :</p>
+                        </div>
+                    </div>
+                    <div class="btn btn-black text-center col-5 col-sm-4 col-md-4 col-lg-2">
+                        <a href="#">Maîtres</a>
+                    </div>
+                </div>
+                <div class="row section-cards-carousel">
+                    <div class="section-cards-shinobi order-1 col-6 order-md-0 col-md-3">
+                        <img src="{{ asset('assets/images/shinobi-cartes.png')}}" alt="shinobi cartes" class="img-fluid">
+                    </div>
+                    <div class="offset-3 col-6 offset-md-0 col-md-9">
+                        <div id="example">
+                            <carousel-3d>
+                                <slide :index="0">
+                                    <img src="{{ asset('assets/images/cartes/haruo.png')}}">
+                                </slide>
+                                <slide :index="1">
+                                    <img src="{{ asset('assets/images/cartes/akimoto.png')}}">
+                                </slide>
+                                <slide :index="2">
+                                    <img src="{{ asset('assets/images/cartes/kaito.png')}}">
+                                </slide>
+                                <slide :index="3">
+                                    <img src="{{ asset('assets/images/cartes/masahiro.png')}}">
+                                </slide>
+                                <slide :index="4">
+                                    <img src="{{ asset('assets/images/cartes/ogawa.png')}}">
+                                </slide>
+                                <slide :index="5">
+                                    <img src="{{ asset('assets/images/cartes/shimizu.png')}}">
+                                </slide>
+                                <slide :index="6">
+                                    <img src="{{ asset('assets/images/cartes/takumi.png')}}">
+                                </slide>
+                            </carousel-3d>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row section-cards-text-l2">
+                            <div class="offset-1 col-10 offset-md-5 col-md-5">
+                                <p>Les maîtres ninja, qui sont au nombre de 7, chacun ayant sa spécialité et doivent donner leur faveur à l’un ou l’autre joueur. Chaque maître rapporte un tel nombre de points de ** lorsqu’il est acquit :</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- COMPETENCES -->
+    <section class="section-black-reverse section-competences">
+        <div class="section-content-reverse">
+            <div class="container">
+                <div class="btn btn-red text-center col-5 col-sm-4 col-md-4 col-lg-2">
+                    <a href="#">Les personnages</a>
+                </div>
+                <!-- CARTES compétences -->
+                <div id="photostack-1" class="photostack photostack-start">
+                    <div>
+                        <figure>
+                            <img style="width: 80px" class="figure-photostack" src="{{ asset('cartes_perso/temoin.png') }}"  />
+                        </figure>
+                        <figure>
+                            <img style="width: 80px" class="figure-photostack" src="{{ asset('cartes_perso/perchiste.png') }}" />
+                        </figure>
+                        <figure>
+                            <img style="width: 80px" class="figure-photostack" src="{{ asset('cartes_perso/agent.png') }}"  />
+                        </figure>
+                        <figure>
+                            <img style="width: 80px" class="figure-photostack" src="{{ asset('cartes_perso/medecin.png') }}"  />
+                        </figure>
+                        <figure>
+                            <img style="width: 80px" class="figure-photostack" src="{{ asset('cartes_perso/policier.png') }}"  />
+                        </figure>
+                        <figure>
+                            <img style="width: 80px" class="figure-photostack" src="{{ asset('cartes_perso/skieuse.png') }}"  />
+                        </figure>
+                        <figure>
+                            <img style="width: 80px" class="figure-photostack" src="{{ asset('cartes_perso/passante.png') }}" />
+                        </figure>
+
+
+                    </div>
+                </div>
+                <!-- TEXTE Compétences -->
+                <div class="row section-competences-text-l1">
+                    <div class="offset-1 col-10 offset-md-5 col-md-5">
+                        <p>Les cartes objets, au nombre de 21, sont distribuées aux joueurs. Ces cartes, servent à s’attirer les différentes faveurs des maîtres.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- JETONS VICTOIRES -->
+    <section class="section-red-l2 section-jetonwin">
+        <div class="section-jetonwin-bg">
+            <div class="section-content">
+                <div class="section-nuage-shinobi offset-md-9 order-1 offset-6 col-6 order-md-0 col-md-3">
+                    <img src="{{ asset('assets/images/shinobi-nuage.png')}}" alt="shinobi nuage" class="img-fluid">
+                </div>
+                <div class="container">
+                    <div class="btn btn-black text-center col-5 col-sm-4 col-md-3 col-lg-2">
+                        <a href="#">Les jetons </a>
+                    </div>
+                    <!-- GROUPE JETONS  -->
+                    <div class="row section-competences-text-l1">
+                        <div class="offset-1 col-10 offset-md-6 col-md-4">
+                            <img src="{{ asset('assets/images/jeton-grp.png')}}" alt="jeton groupe" class="img-fluid">
+                        </div>
+                    </div>
+                    <!-- TEXT JETONS -->
+                    <div class="offset-1 col-10">
+                        <p>Les jetons de victoires au nombre de 7, qui sont à placer sur les maîtres ninjas dont les faveurs ont été accordé.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- JETONS ACTIONS -->
+    <section class="section-black-reverse-l2 section-jetonaction">
+        <div class="section-content-reverse">
+            <div class="container">
+                <!-- JETONS Groupe -->
+                <div class="row section-jetonaction-img">
+                    <div class="offset-1 col-10 offset-md-6 col-md-4">
+                        <img src="{{ asset('assets/images/jeton-big.png')}}" alt="jeton groupe" class="img-fluid">
+                    </div>
+                </div>
+                <div class="btn btn-red text-center col-5 col-sm-4 col-md-3 col-lg-2">
+                    <a href="#">Cartes actions</a>
+                </div>
+                <!-- Jetons images-->
+                <div class="row align-items-start section-jeton-action-jetons">
+                    <div class="offset-1 col-10 offset-sm-0 col-sm-6 offset-md-0 col-md d-flex flex-column align-items-center justify-content-center">
+                        <img src="{{ asset('cartes_action/secretbleu.png') }}" alt="jeton secret" class="img-fluid jeton-img">
+                       <h1>Secret:</h1>
+                        <p>Choisissez 1 carte Objet de votre main.</p>
+                        <p>Placez-la face cachée sous ce jeton Action.</p>
+                        <p>Au début de la phase 3 : Vérification du score de cette manche : révélez cette carte et placez-la en face de la Geisha correspondante.
+                        </p>
+
+                    </div>
+                    <div class="offset-1 col-10 offset-sm-0 col-sm-6 offset-md-0 col-md d-flex flex-column align-items-center justify-content-centerr">
+                        <img src="{{ asset('cartes_action/offrebleu.png') }}" alt="jeton compromis" class="img-fluid jeton-img"">
+                    <h1>Offre:</h1>
+                        <p>Choisissez 3 cartes Objet de votre main. Posez-les face visible devant vous.</p>
+                  <p>Votre adversaire choisit 1 carte Objet parmi ces 3 cartes et la place devant la Geisha correspondante.</p>
+                    <p>Prenez les 2 cartes restantes et placez-les devant la ou les Geisha correspondantes.</p>
+                    </div>
+                    <div class="offset-1 col-10 offset-sm-0 col-sm-6 offset-md-0 col-md d-flex flex-column align-items-center justify-content-center">
+                        <img src="{{ asset('cartes_action/echangebleu.png') }}" alt="jeton cadeau" class="img-fluid jeton-img"">
+                        <h1>Echange:</h1>
+                        <p>Choisissez 4 cartes Objet de votre main et posez-les face visible devant vous.</p>
+                   <p>Formez 2 paires de votre choix avec ces 4 cartes Objet.</p>
+                        <p>Votre adversaire choisit 1 paire de cartes Objet parmi ces 2 paires. Il place ces 2 cartes de son côté devant la ou les Geishas correspondantes.</p>
+                   <p>Prenez la paire de cartes restante et placez-les de votre côté devant la ou les Geishas correspondantes.</p>
+                    </div>
+                    <div class="offset-1 col-10 offset-sm-0 col-sm-6 offset-md-0 col-md d-flex flex-column align-items-center justify-content-center">
+                        <img src="{{ asset('cartes_action/depotbleu.png') }}" alt="jeton concurrence" class="img-fluid jeton-img"">
+                        <h1>Depôt:</h1>
+                        <p>Choisissez 2 cartes Objet de votre main.</p>
+                        <p>Placez-les face cachée sous ce jeton Action.</p>
+                        <p>Le dépôt aurait pu s’appeler “poubelle”. En effet, les deux cartes sous le dépôt ne seront jamais jouées de la manche. (jusqu’à ce qu’une éventuelle nouvelle manche commence et que les 21 cartes soient remélangées).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}
